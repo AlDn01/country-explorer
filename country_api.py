@@ -14,7 +14,7 @@ import requests
 # ─────────────────────────────────────────────
 
 BASE_URL = "https://api.restcountries.com/countries/v5"
-API_KEY  = "rc_live_bb01ce1cb6334194bdcaac7e6622c065"   # ← paste your full key from restcountries.com/api-keys
+API_KEY  = "YOUR_API_KEY_HERE"   # ← paste your full key from restcountries.com/api-keys or the one I  shared on Whatsapp with you
 TIMEOUT  = 5                     # seconds — required by the task spec
 
 HEADERS  = {"Authorization": f"Bearer {API_KEY}"}
