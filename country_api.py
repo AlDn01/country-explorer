@@ -14,7 +14,7 @@ import requests
 # ─────────────────────────────────────────────
 
 BASE_URL = "https://api.restcountries.com/countries/v5"
-API_KEY  = "YOUR_API_KEY_HERE"   # ← paste your full key from restcountries.com/api-keys or the one I  shared on Whatsapp with you
+API_KEY  = "rc_live_bb01ce1cb6334194bdcaac7e6622c065"   # ← paste your full key from restcountries.com/api-keys or the one I  shared on Whatsapp with you
 TIMEOUT  = 5                     # seconds — required by the task spec
 
 HEADERS  = {"Authorization": f"Bearer {API_KEY}"}
@@ -304,62 +304,3 @@ class CountryExplorer:
         top5 = sorted(parsed_list, key=lambda c: c["population"], reverse=True)[:5]
 
         return top5
-
-
-# ─────────────────────────────────────────────
-# DEMO / QUICK TEST
-# ─────────────────────────────────────────────
-
-if __name__ == "__main__":
-    explorer = CountryExplorer()
-
-    # --- Test 1: Search a country ---
-    print("=" * 50)
-    print("TEST 1 — Search: Egypt")
-    print("=" * 50)
-    try:
-        country = explorer.get_country("Egypt")
-        print(f"Official name : {country['official_name']}")
-        print(f"Capital       : {country['capital']}")
-        print(f"Region        : {country['region']}")
-        print(f"Population    : {country['population']:,}")
-        print(f"Area          : {country['area']:,.1f} km²")
-        print(f"Currencies    : {', '.join(country['currencies'])}")
-        print(f"Languages     : {', '.join(country['languages'])}")
-        border_names = explorer.get_border_names(country["border_codes"])
-        print(f"Borders       : {', '.join(border_names) if border_names else 'None'}")
-    except (CountryNotFoundError, APIConnectionError, ValueError) as e:
-        print(f"Error: {e}")
-
-    # --- Test 2: Cache hit ---
-    print("\nTEST 2 — Same search again (should use cache)")
-    try:
-        explorer.get_country("Egypt")
-        print("  Cache working correctly.")
-    except Exception as e:
-        print(f"Error: {e}")
-
-    # --- Test 3: Top 5 in Asia ---
-    print("\nTEST 3 — Top 5 most populous in Asia")
-    try:
-        top5 = explorer.get_top5_by_region("Asia")
-        for i, c in enumerate(top5, 1):
-            print(f"  {i}. {c['common_name']} — {c['population']:,}")
-    except (CountryNotFoundError, APIConnectionError, ValueError) as e:
-        print(f"Error: {e}")
-
-    # --- Test 4: Invalid country ---
-    print("\nTEST 4 — Invalid country name")
-    try:
-        explorer.get_country("Fakeland123")
-    except CountryNotFoundError as e:
-        print(f"Caught correctly → {e}")
-    except APIConnectionError as e:
-        print(f"Network error → {e}")
-
-    # --- Test 5: Invalid region ---
-    print("\nTEST 5 — Invalid region")
-    try:
-        explorer.get_top5_by_region("Westeros")
-    except ValueError as e:
-        print(f"Caught correctly → {e}")
