@@ -9,7 +9,8 @@ Make sure country_api.py is in the same folder.
 """
 
 from country_api import CountryExplorer, CountryNotFoundError, APIConnectionError
-
+from ui.comparison import CountryComparator
+from ui.formatting import CountryFormatter
 
 def format_list(items: list) -> str:
     """Returns a clean string for list values."""
@@ -42,34 +43,15 @@ def search_country(explorer: CountryExplorer) -> None:
 
 def compare_countries(explorer: CountryExplorer) -> None:
     """Menu option 2: compare two countries side by side."""
+
+    comparator = CountryComparator(explorer)
+    formatter = CountryFormatter()
+
     first_name = input("Enter first country: ").strip()
     second_name = input("Enter second country: ").strip()
 
-    first = explorer.get_country(first_name)
-    second = explorer.get_country(second_name)
-
-    population_difference = abs(first["population"] - second["population"])
-    area_difference = abs(first["area"] - second["area"])
-
-    if len(first["languages"]) > len(second["languages"]):
-        more_languages = first["common_name"]
-    elif len(second["languages"]) > len(first["languages"]):
-        more_languages = second["common_name"]
-    else:
-        more_languages = "Both have the same number of languages"
-
-    print("\n" + "=" * 70)
-    print(f"{first['common_name']} vs {second['common_name']}")
-    print("=" * 70)
-    print(f"{'Item':<25}{first['common_name']:<22}{second['common_name']:<22}")
-    print("-" * 70)
-    print(f"{'Population':<25}{first['population']:<22,}{second['population']:<22,}")
-    print(f"{'Area km^2':<25}{first['area']:<22,.1f}{second['area']:<22,.1f}")
-    print(f"{'Languages count':<25}{len(first['languages']):<22}{len(second['languages']):<22}")
-    print("-" * 70)
-    print(f"Population difference : {population_difference:,}")
-    print(f"Area difference       : {area_difference:,.1f} km^2")
-    print(f"More languages        : {more_languages}")
+    result = comparator.compare(first_name, second_name)
+    formatter.print_comparison(result)
 
 
 def show_top5_by_region(explorer: CountryExplorer) -> None:
