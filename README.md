@@ -49,6 +49,8 @@ Supported regions:
 ---
 
 ## Project Structure
+
+```
 country-explorer/
 │
 ├── country_api.py # API layer (Asem)
@@ -59,6 +61,8 @@ country-explorer/
 │ ├── formatting.py # Output formatting (Allaa)
 │
 └── README.md
+```
+
 ---
 
 ## How to Install & Run
@@ -68,10 +72,22 @@ country-explorer/
 pip install requests
 ```
 
-### 2. Run the application
+### 2. Clone the repository
+
+```bash
+git clone https://github.com/USERNAME/country-explorer.git
+cd country-explorer
+```
+
+### 3. Run the program
+
 ```bash
 python country_y.py
 ```
+
+Make sure Python 3 is installed on your system.
+
+---
 
 ### 3. Team Contributions
 
