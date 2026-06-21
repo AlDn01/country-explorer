@@ -97,8 +97,7 @@ The application is structured into three main layers:
 * Connected the UI layer to the API layer
 * Handled navigation between the search, compare, and region-listing features
 
-**Reflection — what I learned about how the web works:**
-*[Add Yusuf's paragraph here]*
+
 
 ### Asem — API Integration & Data Layer
 
@@ -117,8 +116,6 @@ Before this project, I had a vague idea that apps "get data from the internet," 
 * Wrote and structured this README
 * Verified integration between the API, CLI, and UI layers
 
-**Reflection — what I learned about how the web works:**
-*[Add Allaa's paragraph here]*
 
 ---
 
